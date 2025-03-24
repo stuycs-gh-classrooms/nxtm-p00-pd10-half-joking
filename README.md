@@ -41,7 +41,6 @@ B: Magnetic Field of Orb
 
 ### Custom Force
 - What information that is already present in the `Orb` or `OrbNode` classes does this force use?
-  -Instance Variables:
     - velocity
     - bsize
     - center
