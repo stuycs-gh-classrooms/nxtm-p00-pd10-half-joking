@@ -56,10 +56,11 @@ B: Magnetic Field of Orb
   - float field
 
 - Does this force interact with other `Orbs`, or is it applied based on the environment?
-  - YOUR ANSWER HERE
+  - Since it is a magnetic force, it interacts with other orbs. Each orb will have a magnetic force, causing them to attract or repel other orbs depending on the charge. There is no impact from the environment,as the orbs are interacting with one another. 
 
 - In order to calculate this force, do you need to perform extra intermediary calculations? If so, what?
-  - YOUR ANSWER HERE
+  - Yes, each orb needs to have a charge: -1, 0, 1. This charge will determine whether the orb attracts or repels certain orbs.
+  - Each orb has its own magnetic field. Depending on its radius, it will be in "spheres of contact" with other orbs. Beyond the magnetic field, the orbs cannot interact.
 
 --- 
 
