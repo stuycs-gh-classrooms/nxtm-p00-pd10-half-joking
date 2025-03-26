@@ -72,8 +72,7 @@ Describe how you will attempt to simulate orbital motion.
 ### Simulation 2: Spring
 Describe what your spring simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
----  
+--- We will attach springs between each masses and using spring length, k constant, we will simulate the spring force.  
 
 ### Simulation 3: Drag
 Describe what your drag simulation will look like. Explain how it will be setup, and how it should behave while running.
