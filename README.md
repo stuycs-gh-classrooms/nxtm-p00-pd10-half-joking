@@ -73,8 +73,7 @@ Describe how you will attempt to simulate orbital motion.
 Describe what your spring simulation will look like. Explain how it will be setup, and how it should behave while running.
 
 YOUR ANSWER HERE
-
---- 
+---  
 
 ### Simulation 3: Drag
 Describe what your drag simulation will look like. Explain how it will be setup, and how it should behave while running.
