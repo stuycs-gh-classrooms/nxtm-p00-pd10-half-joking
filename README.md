@@ -67,7 +67,7 @@ B: Magnetic Field of Orb
 ### Simulation 1: Gravity
 Describe how you will attempt to simulate orbital motion.
 
---- 
+--- Each "planet" will have a mass and gravitation pull that pulls other masses towards it, affecting their velocities which simulates orbital motion.
 
 ### Simulation 2: Spring
 Describe what your spring simulation will look like. Explain how it will be setup, and how it should behave while running.
