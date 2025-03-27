@@ -74,19 +74,14 @@ Describe what your spring simulation will look like. Explain how it will be setu
 ### Simulation 3: Drag
 Describe what your drag simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+--- One half of the screen will have a high drag force, whereas the other side will have a weak drag force. The orbs will move faster in the high drag force area, and slower in the low drag force area.
 
---- 
-
-### Simulation 4: Custom force
+### Simulation 4: Magnetic force
 Describe what your Custom force simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
-
---- 
+--- We will show the magnetic field with a light colored shape and when it runs, depending on the magnetic force and charge of the orbs, they will attract/repel from one another.
 
 ### Simulation 5: Combination
 Describe what your combination simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
-
+--- There will be a positive side and a negative side. The orbs with a larger magnetic field will be more easily attracted to the separate sides opposite to their charge. In the end, the orbs will be organized by charge and size of magnetic field.
