@@ -44,9 +44,6 @@ B: Magnetic Field of Orb
     - velocity
     - bsize
     - center
-    - OrbNode next
-    - OrbNode previous
-  - All Methods!!
 
 - Does this force require any new constants, if so what are they and what values will you try initially?
   - No new constants
