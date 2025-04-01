@@ -17,7 +17,7 @@ class Orb {
      float y = random(bsize/2, height-bsize/2);
      center = new PVector(x, y);
      mass = random(10, 100);
-     velocity = new PVector();
+     velocity = new PVector(random(20),random(25));
      acceleration = new PVector();
      charge = random(-5, 5);
      magneticField = random(1, 5);
@@ -30,8 +30,8 @@ class Orb {
      center = new PVector(x, y);
      velocity = new PVector();
      acceleration = new PVector();
-     charge = random(-5, 5);
-     magneticField = random(1, 5);
+     charge = random(-5, 5); // strength of the orb to attract to other orbs
+     magneticField = random(1, 5); // radius in which other orbs are attracted to a specific orb
      setColor();
    }
 
@@ -91,8 +91,8 @@ class Orb {
     float rMag = r.mag(); // length of vector r
     r.normalize();
     
-    if (rMag < this.magneticField && rMag < other.magneticField) { // checks whether the distance between two orbs (rMag) is smaller than the magnetic field of the two orbs
-      float forceMag = k * (this.charge * other.charge) / pow(rMag, 2); // Coulomb's Law to find the magnitude of the magnetic force
+    if ((rMag < this.magneticField) && (rMag < other.magneticField)) { // checks whether the distance between two orbs (rMag) is smaller than the magnetic field of the two orbs
+      float forceMag = charge * (velocity.mag() * magneticField); // F = q(v x B)
       PVector force = r.copy(); // creates a copy of vector r
       force.mult(forceMag);
       this.applyForce(force);

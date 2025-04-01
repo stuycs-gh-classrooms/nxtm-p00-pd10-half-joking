@@ -58,15 +58,15 @@ class OrbList {
     }
   }//applySprings
 
-  voud applyDragForce() {
+  void applyDragForce() {
     OrbNode current = front;
     while (current != null) {
       if (current.center.x < width / 2) {
-        current.applyForce(current.DragForce(0.2)); // high drag force on the left
+        current.applyForce(current.getDragForce(0.2)); // high drag force on the left
       } else {
         current.applyForce(current.getDragForce(0.05)); // low drag force on the right
       }
-      current = curent.next;
+      current = current.next;
     }
   }
 

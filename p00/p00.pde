@@ -26,7 +26,7 @@ void setup() {
   earth = new FixedOrb(width/2, height * 200, 1, 20000);
 
   slinky = new OrbList();
-//  slinky.populate(NUM_ORBS, true);
+  slinky.populateWithGravity(NUM_ORBS);
 }//setup
 
 void draw() {
@@ -62,7 +62,7 @@ void keyPressed() {
     slinky.applySprings(SPRING_LENGTH, SPRING_K);
   }
   if (key == '3') {
-    slinky.applyDragForce();
+    //slinky.applyDragForce();
   }
   if (key == '4') {
     slinky.applyMagneticForce();
