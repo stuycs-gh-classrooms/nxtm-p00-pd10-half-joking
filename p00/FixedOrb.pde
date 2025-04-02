@@ -13,5 +13,4 @@ class FixedOrb extends Orb {
   void move(boolean bounce) {
     //do nothing
   }
-
 }//fixedOrb

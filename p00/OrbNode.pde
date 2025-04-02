@@ -8,7 +8,7 @@ class OrbNode extends Orb {
     next = previous = null;
     gravityPresent = false;
   }//default constructor
-  
+
   OrbNode(float x, float y, float s, float m) {
     super(x, y, s, m);
     next = previous = null;
@@ -17,12 +17,13 @@ class OrbNode extends Orb {
 
   void display() {
     super.display();
-    if (gravityPresent) {
-      stroke(0,255,0); // green when gravity is active
+    float fieldSize = max(magneticField * 10, bsize + 10); // magnetic field must be larger than the radius of the orb
+    if (magneticField > 0) {
+      stroke(#8FE6FC); // to show magnetic field
       noFill();
-      ellipse(center.x, center.y, 50, 50); // gravity area
+      ellipse(center.x, center.y, fieldSize, fieldSize); // gravity area
     }//next spring
-  }//drawSpring
+  }
 
   void applySprings(int springLength, float springK) {
     if (next != null) {

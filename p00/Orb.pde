@@ -12,28 +12,28 @@ class Orb {
 
 
   Orb() {
-     bsize = random(10, MAX_SIZE);
-     float x = random(bsize/2, width-bsize/2);
-     float y = random(bsize/2, height-bsize/2);
-     center = new PVector(x, y);
-     mass = random(10, 100);
-     velocity = new PVector(random(20),random(25));
-     acceleration = new PVector();
-     charge = random(-5, 5);
-     magneticField = random(1, 5);
-     setColor();
+    bsize = random(10, MAX_SIZE);
+    float x = random(bsize/2, width-bsize/2);
+    float y = random(bsize/2, height-bsize/2);
+    center = new PVector(x, y);
+    mass = random(10, 100);
+    velocity = new PVector(random(20), random(25));
+    acceleration = new PVector();
+    charge = random(-5, 5);
+    magneticField = random(1, 5);
+    setColor();
   }
 
   Orb(float x, float y, float s, float m) {
-     bsize = s;
-     mass = m;
-     center = new PVector(x, y);
-     velocity = new PVector();
-     acceleration = new PVector();
-     charge = random(-5, 5); // strength of the orb to attract to other orbs
-     magneticField = random(1, 5); // radius in which other orbs are attracted to a specific orb
-     setColor();
-   }
+    bsize = s;
+    mass = m;
+    center = new PVector(x, y);
+    velocity = new PVector();
+    acceleration = new PVector();
+    charge = random(-5, 5); // strength of the orb to attract to other orbs
+    magneticField = random(1, 5); // radius in which other orbs are attracted to a specific orb
+    setColor();
+  }
 
   //movement behavior
   void move(boolean bounce) {
@@ -84,13 +84,13 @@ class Orb {
 
     return direction;
   }//getSpring
-  
+
   void applyMagneticForce(Orb other) {
     float k = 0.0001; // force constant
     PVector r = PVector.sub(other.center, this.center); // subtracts two vectors to find the direction of magnetic interaction
     float rMag = r.mag(); // length of vector r
     r.normalize();
-    
+
     if ((rMag < this.magneticField) && (rMag < other.magneticField)) { // checks whether the distance between two orbs (rMag) is smaller than the magnetic field of the two orbs
       float forceMag = charge * (velocity.mag() * magneticField); // F = q(v x B)
       PVector force = r.copy(); // creates a copy of vector r
@@ -99,7 +99,7 @@ class Orb {
     }
   }
 
-  boolean yBounce(){
+  boolean yBounce() {
     if (center.y > height - bsize/2) {
       velocity.y *= -1;
       center.y = height - bsize/2;
@@ -117,8 +117,7 @@ class Orb {
       center.x = width - bsize/2;
       velocity.x *= -1;
       return true;
-    }
-    else if (center.x < bsize/2) {
+    } else if (center.x < bsize/2) {
       center.x = bsize/2;
       velocity.x *= -1;
       return true;
@@ -128,7 +127,7 @@ class Orb {
 
   boolean collisionCheck(Orb other) {
     return ( this.center.dist(other.center)
-             <= (this.bsize/2 + other.bsize/2) );
+      <= (this.bsize/2 + other.bsize/2) );
   }//collisionCheck
 
   boolean isSelected(float x, float y) {
@@ -150,5 +149,4 @@ class Orb {
     fill(0);
     //text(mass, center.x, center.y);
   }//display
-
 }//Orb
