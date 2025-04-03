@@ -15,8 +15,9 @@ int GRAVITY = 2;
 int DRAGF = 3;
 int MAGNETISM = 4;
 int SPRING = 5;
-boolean[] toggles = new boolean[6];
-String[] modes = {"Moving", "Bounce", "Gravity", "Drag", "MagneticF", "SpringF"};
+int COLLISION = 6;
+boolean[] toggles = new boolean[7];
+String[] modes = {"Moving", "Bounce", "Gravity", "Drag", "MagneticF", "SpringF", "Collision"};
 
 float highDrag = 0.3; // high drag coefficient
 float mediumDrag = 0.2; // medium drag coefficient
@@ -98,6 +99,10 @@ void keyPressed() {
     toggles[SPRING] = !toggles[SPRING];
 
     //slinky.applySpringForce();
+  }
+   if (key == '6') {
+    toggles[COLLISION] = !toggles[COLLISION];
+    slinky.applyCollision();
   }
   if (key == 'r') {
     slinky = new OrbList();

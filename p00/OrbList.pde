@@ -81,7 +81,9 @@ class OrbList {
     
     
   }
-
+ void applyCollision() {
+   
+  }
   /*===========================
    removeFront()
    

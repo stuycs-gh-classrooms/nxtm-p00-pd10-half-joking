@@ -100,6 +100,15 @@ class Orb {
     }
   }
 
+  void ApplyCollisions(Orb other){
+    
+      if (collisionCheck(other)) {
+         velocity.y *= -1;
+         velocity.x *= -1;
+      }
+  println("yes");
+      
+  }
   boolean yBounce() {
     if (center.y > height - bsize/2) {
       velocity.y *= -1;
@@ -131,11 +140,12 @@ class Orb {
       <= (this.bsize/2 + other.bsize/2) );
   }//collisionCheck
 
+  
   boolean isSelected(float x, float y) {
     float d = dist(x, y, center.x, center.y);
     return d < bsize/2;
   }//isSelected
-
+  
   void setColor() {
     color c0 = color(0, 255, 255);
     color c1 = color(0);
@@ -150,4 +160,5 @@ class Orb {
     fill(0);
     //text(mass, center.x, center.y);
   }//display
+  
 }//Orb
