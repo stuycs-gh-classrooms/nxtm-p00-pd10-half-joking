@@ -13,8 +13,10 @@ int MOVING = 0;
 int BOUNCE = 1;
 int GRAVITY = 2;
 int DRAGF = 3;
-boolean[] toggles = new boolean[4];
-String[] modes = {"Moving", "Bounce", "Gravity", "Drag"};
+int MAGNETISM = 4;
+int SPRING = 5;
+boolean[] toggles = new boolean[6];
+String[] modes = {"Moving", "Bounce", "Gravity", "Drag", "MagneticF", "SpringF"};
 
 float highDrag = 0.3; // high drag coefficient
 float mediumDrag = 0.2; // medium drag coefficient
@@ -50,11 +52,19 @@ void draw() {
 
   if (toggles[MOVING]) {
 
-    slinky.applySprings(SPRING_LENGTH, SPRING_K);
 
     if (toggles[GRAVITY]) {
       slinky.applyGravity(earth, GRAVITY);
     }
+       if (toggles[MAGNETISM]) {
+      slinky.applyMagneticForce();
+      println("Magnetism: ON");
+    }
+    if (toggles[SPRING]) {
+        slinky.applySprings(SPRING_LENGTH, SPRING_K);
+    }
+    
+
     slinky.run(toggles[BOUNCE]);
     applyDrag();
   }//moving
@@ -67,7 +77,7 @@ void keyPressed() {
   }
   if (key == '1') {
     toggles[GRAVITY] = !toggles[GRAVITY];
-    toggles[DRAGF] = false;
+    //toggles[DRAGF] = false;
     println("egg");
   }
   if (key == 'b') {
@@ -75,17 +85,20 @@ void keyPressed() {
   }
   if (key == '3') {
     toggles[DRAGF] = !toggles[DRAGF];
-    toggles[GRAVITY] = false; // gravity is off when drag is active
+    //toggles[GRAVITY] = false; // gravity is off when drag is active
   }
   if (key == '2') {
     slinky.applySprings(SPRING_LENGTH, SPRING_K);
   }
   if (key == '4') {
+    toggles[MAGNETISM] = !toggles[MAGNETISM];
     slinky.applyMagneticForce();
   }
-  //    if (key == '5') {
-  //    slinky.applySpringForce();
-  // }
+  if (key == '5') {
+    toggles[SPRING] = !toggles[SPRING];
+
+    //slinky.applySpringForce();
+  }
 }//keyPressed
 
 

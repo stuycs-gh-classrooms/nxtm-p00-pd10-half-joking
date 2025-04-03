@@ -86,13 +86,13 @@ class Orb {
   }//getSpring
 
   void applyMagneticForce(Orb other) {
-    float k = 0.0001; // force constant
+    float k = 100000; // force constant
     PVector r = PVector.sub(other.center, this.center); // subtracts two vectors to find the direction of magnetic interaction
     float rMag = r.mag(); // length of vector r
     r.normalize();
 
     if ((rMag < this.magneticField) && (rMag < other.magneticField)) { // checks whether the distance between two orbs (rMag) is smaller than the magnetic field of the two orbs
-      float forceMag = charge * (velocity.mag() * magneticField); // F = q(v x B)
+      float forceMag = k * charge * (velocity.mag() * magneticField); // F = q(v x B)
       PVector force = r.copy(); // creates a copy of vector r
       force.mult(forceMag);
       this.applyForce(force);

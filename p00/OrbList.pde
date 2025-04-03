@@ -76,7 +76,7 @@ class OrbList {
     while (current != null) {
       while (other != null) {
         if (current != other) {
-          current.applyMagneticForce(other);
+          current.applyMagneticForce(other);//orb nodes inherits function from orb class
         }
         other = other.next;
       }
