@@ -3,7 +3,7 @@ class OrbNode extends Orb {
   OrbNode next;
   OrbNode previous;
   boolean gravityPresent;
-
+  
   OrbNode() {
     next = previous = null;
     gravityPresent = false;
@@ -17,11 +17,12 @@ class OrbNode extends Orb {
 
   void display() {
     super.display();
-    float fieldSize = max(magneticField * 10, bsize + 10); // magnetic field must be larger than the radius of the orb
+    float fieldSize = max(magneticField * 20, bsize + 10); // magnetic field must be larger than the radius of the orb
     if (magneticField > 0) {
       stroke(#8FE6FC); // to show magnetic field
       noFill();
       ellipse(center.x, center.y, fieldSize, fieldSize); // gravity area
+      fieldRadius = fieldSize/2;
     }//next spring
 
     if (next != null) {

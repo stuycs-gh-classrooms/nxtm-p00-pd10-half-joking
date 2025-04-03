@@ -58,7 +58,7 @@ void draw() {
     }
        if (toggles[MAGNETISM]) {
       slinky.applyMagneticForce();
-      println("Magnetism: ON");
+      //println("Magnetism: ON");
     }
     if (toggles[SPRING]) {
         slinky.applySprings(SPRING_LENGTH, SPRING_K);
@@ -98,6 +98,10 @@ void keyPressed() {
     toggles[SPRING] = !toggles[SPRING];
 
     //slinky.applySpringForce();
+  }
+  if (key == 'r') {
+    slinky = new OrbList();
+  slinky.populateWithGravity(NUM_ORBS);
   }
 }//keyPressed
 

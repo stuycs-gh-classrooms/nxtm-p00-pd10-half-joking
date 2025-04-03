@@ -73,15 +73,13 @@ class OrbList {
   void applyMagneticForce() {
     OrbNode current = front;
     OrbNode other = front;
+ 
     while (current != null) {
-      while (other != null) {
-        if (current != other) {
-          current.applyMagneticForce(other);//orb nodes inherits function from orb class
-        }
-        other = other.next;
-      }
-      current = current.next;
+      current.applyMagneticForce(other); // move the orb (bounce if necessary)
+      current = current.next; // move the next orb
     }
+    
+    
   }
 
   /*===========================
