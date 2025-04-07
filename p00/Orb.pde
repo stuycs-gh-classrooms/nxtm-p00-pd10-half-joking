@@ -9,7 +9,7 @@ class Orb {
   color c;
   float charge;
   float magneticField;
-
+  float fieldRadius; 
 
   Orb() {
     bsize = random(10, MAX_SIZE);
@@ -17,7 +17,7 @@ class Orb {
     float y = random(bsize/2, height-bsize/2);
     center = new PVector(x, y);
     mass = random(10, 100);
-    velocity = new PVector(random(20), random(25));
+    velocity = new PVector(random(-5,5), random(-5,5));
     acceleration = new PVector();
     charge = random(-5, 5);
     magneticField = random(1, 5);
@@ -85,20 +85,30 @@ class Orb {
     return direction;
   }//getSpring
 
-  void applyMagneticForce(Orb other) {
-    float k = 0.0001; // force constant
-    PVector r = PVector.sub(other.center, this.center); // subtracts two vectors to find the direction of magnetic interaction
-    float rMag = r.mag(); // length of vector r
-    r.normalize();
+  void applyMagneticForce(OrbNode other) {
+    float k = 2; // force constant
+    PVector direction = PVector.sub(other.center, this.center);
+    float rMag = dist(this.center.x, this.center.y, other.center.x, other.center.y);
+    direction.normalize();
 
-    if ((rMag < this.magneticField) && (rMag < other.magneticField)) { // checks whether the distance between two orbs (rMag) is smaller than the magnetic field of the two orbs
-      float forceMag = charge * (velocity.mag() * magneticField); // F = q(v x B)
-      PVector force = r.copy(); // creates a copy of vector r
-      force.mult(forceMag);
-      this.applyForce(force);
+    if ((rMag < this.fieldRadius) && (rMag < other.fieldRadius)) { // checks whether the distance between two orbs (rMag) is smaller than the magnetic field of the two orbs
+      float forceMag =  charge * velocity.mag() * k ; // F = q(v x B)
+      direction.mult(forceMag);
+
+      println(forceMag);
+      this.applyForce(direction);
     }
   }
 
+  void ApplyCollisions(Orb other){
+    
+      if (collisionCheck(other)) {
+         velocity.y *= -1;
+         velocity.x *= -1;
+      }
+  println("yes");
+      
+  }
   boolean yBounce() {
     if (center.y > height - bsize/2) {
       velocity.y *= -1;
@@ -130,11 +140,12 @@ class Orb {
       <= (this.bsize/2 + other.bsize/2) );
   }//collisionCheck
 
+  
   boolean isSelected(float x, float y) {
     float d = dist(x, y, center.x, center.y);
     return d < bsize/2;
   }//isSelected
-
+  
   void setColor() {
     color c0 = color(0, 255, 255);
     color c1 = color(0);
@@ -149,4 +160,5 @@ class Orb {
     fill(0);
     //text(mass, center.x, center.y);
   }//display
+  
 }//Orb

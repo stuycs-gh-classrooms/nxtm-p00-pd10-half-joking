@@ -13,8 +13,11 @@ int MOVING = 0;
 int BOUNCE = 1;
 int GRAVITY = 2;
 int DRAGF = 3;
-boolean[] toggles = new boolean[4];
-String[] modes = {"Moving", "Bounce", "Gravity", "Drag"};
+int MAGNETISM = 4;
+int SPRING = 5;
+int COLLISION = 6;
+boolean[] toggles = new boolean[7];
+String[] modes = {"Moving", "Bounce", "Gravity", "Drag", "MagneticF", "SpringF", "Collision"};
 
 float highDrag = 0.3; // high drag coefficient
 float mediumDrag = 0.2; // medium drag coefficient
@@ -34,7 +37,7 @@ void setup() {
 
 void draw() {
   background(255);
-
+  displayMode(); // display the toggle states
   if (toggles[DRAGF]) { // if 3 is pressed
     fill(#A5F5FF);
     rect(0, 0, width, height / 3); // top section (high drag)
@@ -42,6 +45,10 @@ void draw() {
     rect(0, height / 3, width, height / 3); // middle section (medium drag)
     fill (#EEFAA4);
     rect(0, 2 * height / 3, width, height / 3);
+<<<<<<< HEAD
+=======
+    displayMode(); // display the toggle states
+>>>>>>> refs/remotes/origin/main
   }
   displayMode(); // display the toggle states
 
@@ -49,12 +56,26 @@ void draw() {
     slinky.applyGravity(earth, GRAVITY); // apply gravity to the orbs
   }
   if (toggles[MOVING]) {
+<<<<<<< HEAD
     if (toggles[DRAGF]) {
       applyDrag();
     }
+=======
+
+
+>>>>>>> refs/remotes/origin/main
     if (toggles[GRAVITY]) {
       slinky.applyGravity(earth, GRAVITY);
     }
+       if (toggles[MAGNETISM]) {
+      slinky.applyMagneticForce();
+      //println("Magnetism: ON");
+    }
+    if (toggles[SPRING]) {
+        slinky.applySprings(SPRING_LENGTH, SPRING_K);
+    }
+    
+
     slinky.run(toggles[BOUNCE]);
   }
   slinky.display();
@@ -70,16 +91,38 @@ void keyPressed() {
   }
   if (key == '1') {
     toggles[GRAVITY] = !toggles[GRAVITY];
+    //toggles[DRAGF] = false;
+    println("egg");
   }
   if (key == '2') {
     slinky.applySprings(SPRING_LENGTH, SPRING_K);
   }
   if (key == '3') {
     toggles[DRAGF] = !toggles[DRAGF];
-    toggles[GRAVITY] = false; // gravity is off when drag is active
+    //toggles[GRAVITY] = false; // gravity is off when drag is active
   }
+<<<<<<< HEAD
+=======
+  if (key == '2') {
+    slinky.applySprings(SPRING_LENGTH, SPRING_K);
+  }
+>>>>>>> refs/remotes/origin/main
   if (key == '4') {
+    toggles[MAGNETISM] = !toggles[MAGNETISM];
     slinky.applyMagneticForce();
+  }
+  if (key == '5') {
+    toggles[SPRING] = !toggles[SPRING];
+
+    //slinky.applySpringForce();
+  }
+   if (key == '6') {
+    toggles[COLLISION] = !toggles[COLLISION];
+    slinky.applyCollision();
+  }
+  if (key == 'r') {
+    slinky = new OrbList();
+  slinky.populateWithGravity(NUM_ORBS);
   }
 }//keyPressed
 
