@@ -17,17 +17,17 @@ boolean[] toggles = new boolean[4];
 String[] modes = {"Moving", "Bounce", "Gravity", "Drag"};
 
 float highDrag = 0.3; // high drag coefficient
+float mediumDrag = 0.2; // medium drag coefficient
 float lowDrag = 0.05; // low drag coefficient
 
 FixedOrb earth;
+
 
 OrbList slinky;
 
 void setup() {
   size(600, 600);
-
   earth = new FixedOrb(width/2, height * 200, 1, 20000);
-
   slinky = new OrbList();
   slinky.populateWithGravity(NUM_ORBS);
 }//setup
@@ -36,25 +36,28 @@ void draw() {
   background(255);
 
   if (toggles[DRAGF]) { // if 3 is pressed
-    fill(#D8A3FC);
-    rect(0, 0, width/2, height); // left half
-    fill(#FCA3DC);
-    rect(width/2, 0, width/2, height); // right half
-    displayMode();
+    fill(#A5F5FF);
+    rect(0, 0, width, height / 3); // top section (high drag)
+    fill(#A5FFBF);
+    rect(0, height / 3, width, height / 3); // middle section (medium drag)
+    fill (#EEFAA4);
+    rect(0, 2 * height / 3, width, height / 3);
   }
+  displayMode(); // display the toggle states
 
-  slinky.display();
-
+  if (toggles[GRAVITY]) {
+    slinky.applyGravity(earth, GRAVITY); // apply gravity to the orbs
+  }
   if (toggles[MOVING]) {
-
-    slinky.applySprings(SPRING_LENGTH, SPRING_K);
-
+    if (toggles[DRAGF]) {
+      applyDrag();
+    }
     if (toggles[GRAVITY]) {
       slinky.applyGravity(earth, GRAVITY);
     }
     slinky.run(toggles[BOUNCE]);
-    applyDrag();
-  }//moving
+  }
+  slinky.display();
 }
 
 
@@ -62,25 +65,19 @@ void keyPressed() {
   if (key == ' ') {
     toggles[MOVING] = !toggles[MOVING];
   }
+  if (key == 'b') {
+    toggles[BOUNCE] = !toggles[BOUNCE];
+  }
   if (key == '1') {
     toggles[GRAVITY] = !toggles[GRAVITY];
   }
-  if (key == 'b') {
-    toggles[BOUNCE] = !toggles[BOUNCE];
+  if (key == '2') {
+    slinky.applySprings(SPRING_LENGTH, SPRING_K);
   }
   if (key == '3') {
     toggles[DRAGF] = !toggles[DRAGF];
     toggles[GRAVITY] = false; // gravity is off when drag is active
   }
-  //  if (key == '1') {
-  //    slinky.populateWithGravity(NUM_ORBS);
-  //  }
-  if (key == '2') {
-    slinky.applySprings(SPRING_LENGTH, SPRING_K);
-  }
-  // if (key == '3') {
-  //   toggles[DRAGF] = !toggles[DRAGF];
-  // }
   if (key == '4') {
     slinky.applyMagneticForce();
   }
@@ -115,6 +112,8 @@ void applyDrag() {
   while (current != null) {
     if (current.center.x < width/2) {
       current.applyForce(current.getDragForce(highDrag)); // if orb is on the left side, apply high drag force
+    } else if (current.center.y >= height / 3 && current.center.y < 2 * height / 3) {
+      current.applyForce(current.getDragForce(mediumDrag));
     } else {
       current.applyForce(current.getDragForce(lowDrag));
     }
