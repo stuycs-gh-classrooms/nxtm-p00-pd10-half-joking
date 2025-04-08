@@ -45,10 +45,7 @@ void draw() {
     rect(0, height / 3, width, height / 3); // middle section (medium drag)
     fill (#EEFAA4);
     rect(0, 2 * height / 3, width, height / 3);
-<<<<<<< HEAD
-=======
     displayMode(); // display the toggle states
->>>>>>> refs/remotes/origin/main
   }
   displayMode(); // display the toggle states
 
@@ -56,14 +53,10 @@ void draw() {
     slinky.applyGravity(earth, GRAVITY); // apply gravity to the orbs
   }
   if (toggles[MOVING]) {
-<<<<<<< HEAD
     if (toggles[DRAGF]) {
       applyDrag();
     }
-=======
 
-
->>>>>>> refs/remotes/origin/main
     if (toggles[GRAVITY]) {
       slinky.applyGravity(earth, GRAVITY);
     }
@@ -95,28 +88,20 @@ void keyPressed() {
     println("egg");
   }
   if (key == '2') {
-    slinky.applySprings(SPRING_LENGTH, SPRING_K);
-  }
-  if (key == '3') {
-    toggles[DRAGF] = !toggles[DRAGF];
-    //toggles[GRAVITY] = false; // gravity is off when drag is active
-  }
-<<<<<<< HEAD
-=======
-  if (key == '2') {
-    slinky.applySprings(SPRING_LENGTH, SPRING_K);
-  }
->>>>>>> refs/remotes/origin/main
-  if (key == '4') {
-    toggles[MAGNETISM] = !toggles[MAGNETISM];
-    slinky.applyMagneticForce();
-  }
-  if (key == '5') {
     toggles[SPRING] = !toggles[SPRING];
 
     //slinky.applySpringForce();
   }
-   if (key == '6') {
+  
+  if (key == '3') {
+    toggles[DRAGF] = !toggles[DRAGF];
+    //toggles[GRAVITY] = false; // gravity is off when drag is active
+  }
+  if (key == '4') {
+    toggles[MAGNETISM] = !toggles[MAGNETISM];
+    slinky.applyMagneticForce();
+  }
+   if (key == '5') {
     toggles[COLLISION] = !toggles[COLLISION];
     slinky.applyCollision();
   }
