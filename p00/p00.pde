@@ -25,13 +25,12 @@ float lowDrag = 0.05; // low drag coefficient
 
 FixedOrb earth;
 
+
 OrbList slinky;
 
 void setup() {
   size(600, 600);
-
   earth = new FixedOrb(width/2, height * 200, 1, 20000);
-
   slinky = new OrbList();
   slinky.populateWithGravity(NUM_ORBS);
 }//setup
@@ -48,11 +47,15 @@ void draw() {
     rect(0, 2 * height / 3, width, height / 3);
     displayMode(); // display the toggle states
   }
+  displayMode(); // display the toggle states
 
-  slinky.display();
-
+  if (toggles[GRAVITY]) {
+    slinky.applyGravity(earth, GRAVITY); // apply gravity to the orbs
+  }
   if (toggles[MOVING]) {
-
+    if (toggles[DRAGF]) {
+      applyDrag();
+    }
 
     if (toggles[GRAVITY]) {
       slinky.applyGravity(earth, GRAVITY);
@@ -67,8 +70,8 @@ void draw() {
     
 
     slinky.run(toggles[BOUNCE]);
-    applyDrag();
-  }//moving
+  }
+  slinky.display();
 }
 
 
@@ -76,31 +79,29 @@ void keyPressed() {
   if (key == ' ') {
     toggles[MOVING] = !toggles[MOVING];
   }
+  if (key == 'b') {
+    toggles[BOUNCE] = !toggles[BOUNCE];
+  }
   if (key == '1') {
     toggles[GRAVITY] = !toggles[GRAVITY];
     //toggles[DRAGF] = false;
     println("egg");
   }
-  if (key == 'b') {
-    toggles[BOUNCE] = !toggles[BOUNCE];
+  if (key == '2') {
+    toggles[SPRING] = !toggles[SPRING];
+
+    //slinky.applySpringForce();
   }
+  
   if (key == '3') {
     toggles[DRAGF] = !toggles[DRAGF];
     //toggles[GRAVITY] = false; // gravity is off when drag is active
-  }
-  if (key == '2') {
-    slinky.applySprings(SPRING_LENGTH, SPRING_K);
   }
   if (key == '4') {
     toggles[MAGNETISM] = !toggles[MAGNETISM];
     slinky.applyMagneticForce();
   }
-  if (key == '5') {
-    toggles[SPRING] = !toggles[SPRING];
-
-    //slinky.applySpringForce();
-  }
-   if (key == '6') {
+   if (key == '5') {
     toggles[COLLISION] = !toggles[COLLISION];
     slinky.applyCollision();
   }
@@ -139,6 +140,8 @@ void applyDrag() {
   while (current != null) {
     if (current.center.x < width/2) {
       current.applyForce(current.getDragForce(highDrag)); // if orb is on the left side, apply high drag force
+    } else if (current.center.y >= height / 3 && current.center.y < 2 * height / 3) {
+      current.applyForce(current.getDragForce(mediumDrag));
     } else {
       current.applyForce(current.getDragForce(lowDrag));
     }
