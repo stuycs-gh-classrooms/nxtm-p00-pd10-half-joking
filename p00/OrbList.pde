@@ -73,16 +73,21 @@ class OrbList {
   void applyMagneticForce() {
     OrbNode current = front;
     OrbNode other = front;
- 
-    while (current != null) {
-      current.applyMagneticForce(other); // move the orb (bounce if necessary)
-      current = current.next; // move the next orb
+
+    while (other.next != null) {
+      println("working?");
+      current = front;
+      while (current != null) {
+        if (current == other) {
+         current = current.next; 
+        }
+        current.applyMagneticForce(other); //
+        current = current.next;
+      }
+      other = other.next;
     }
-    
-    
-  }
- void applyCollision() {
-   
+  }//magfrce
+  void applyCollision() {
   }
   /*===========================
    removeFront()

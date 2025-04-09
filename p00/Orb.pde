@@ -92,7 +92,7 @@ class Orb {
     direction.normalize();
 
     if ((rMag < this.fieldRadius) && (rMag < other.fieldRadius)) { // checks whether the distance between two orbs (rMag) is smaller than the magnetic field of the two orbs
-      float forceMag =  charge * velocity.mag() * k ; // F = q(v x B)
+      float forceMag = charge * velocity.mag() * k ; // F = q(v x B)
       direction.mult(forceMag);
 
       println(forceMag);
