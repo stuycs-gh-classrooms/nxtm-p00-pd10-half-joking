@@ -100,7 +100,7 @@ class Orb {
     }
   }
 
-  void ApplyCollisions(Orb other){
+  void ApplyCollisions(OrbNode other){
     
       if (collisionCheck(other)) {
          velocity.y *= -1;
@@ -135,7 +135,7 @@ class Orb {
     return false;
   }//xbounce
 
-  boolean collisionCheck(Orb other) {
+  boolean collisionCheck(OrbNode other) {
     return ( this.center.dist(other.center)
       <= (this.bsize/2 + other.bsize/2) );
   }//collisionCheck

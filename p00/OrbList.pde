@@ -87,7 +87,24 @@ class OrbList {
       other = other.next;
     }
   }//magfrce
+  
+  
   void applyCollision() {
+    OrbNode current = front;
+    OrbNode other = front;
+
+    while (other.next != null) {
+      println("working?");
+      current = front;
+      while (current != null) {
+        if (current == other) {
+         current = current.next; 
+        }
+        current.ApplyCollisions(other); //
+        current = current.next;
+      }
+      other = other.next;
+    }
   }
   /*===========================
    removeFront()
